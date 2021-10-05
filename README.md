@@ -1,5 +1,11 @@
 # i3-open-next-ws
 A companion utility to i3wm for managing workspaces.
+## Installation:
+```sh
+cargo install --git https://github.com/JohnDowson/i3-open-next-ws.git
+# add ~/.cargo/bin/ to path
+```
+
 ## Usage:
 ```sh
 i3-open-next-ws --move # Moves focused window to first unused workspace
