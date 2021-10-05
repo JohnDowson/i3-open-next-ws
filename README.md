@@ -1,5 +1,7 @@
 # i3-open-next-ws
 A companion utility to i3wm for managing workspaces.
+I found myself wanting to move windows to their own workspaces, without caring which number that workspace has, so I wrote this simple tool to pick first unused workspace automagically.
+
 ## Installation:
 ```sh
 cargo install --git https://github.com/JohnDowson/i3-open-next-ws.git
