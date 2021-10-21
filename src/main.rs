@@ -1,16 +1,15 @@
-use clap::{clap_app, crate_version};
+use clap::{crate_version, App, Arg};
 use i3_ipc::{Connect, I3};
 use std::collections::HashSet;
 use std::io::{self, stdout, Write};
 
 fn opts() -> (bool, bool) {
-    let matches = clap_app!(i3_open_next_ws =>
-        (version: crate_version!())
-        (about: "A companion utility to i3wm for managing workspaces.\nCall without arguments to get first unused workspace number on STDOUT")
-        (@arg move: -m --move "Move focused window to the first unused workspace")
-        (@arg focus: -f --focus "Focus first unused workspace")
-    )
-    .get_matches();
+    let matches = App::new("i3-open-next-ws")
+        .version(crate_version!())
+        .about("A companion utility to i3wm for managing workspaces.\nCall without arguments to get first unused workspace number on STDOUT")
+        .arg(Arg::new("move").short('m').long("move").about("Move focused window to the first unused workspace"))
+        .arg(Arg::new("focus").short('f').long("focus").about("Move focused window to the first unused workspace"))
+        .get_matches();
     (matches.is_present("move"), matches.is_present("focus"))
 }
 
