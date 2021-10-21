@@ -1,7 +1,7 @@
 use clap::{crate_version, App, Arg};
-use i3_ipc::{Connect, I3};
 use std::collections::HashSet;
 use std::io::{self, stdout, Write};
+use swayipc::{Connection, Fallible};
 
 fn opts() -> (bool, bool) {
     let matches = App::new("i3-open-next-ws")
@@ -13,10 +13,10 @@ fn opts() -> (bool, bool) {
     (matches.is_present("move"), matches.is_present("focus"))
 }
 
-fn main() -> io::Result<()> {
+fn main() -> Fallible<()> {
     let opts = opts();
-    let mut i3 = I3::connect()?;
-    let mut wss: HashSet<_> = i3.get_workspaces()?.iter().map(|ws| ws.num).collect();
+    let mut wm = Connection::new()?;
+    let mut wss: HashSet<_> = wm.get_workspaces()?.iter().map(|ws| ws.num).collect();
     let next_ws = {
         let mut n = 1;
         loop {
@@ -29,14 +29,14 @@ fn main() -> io::Result<()> {
     };
     match opts {
         (true, true) => {
-            i3.run_command(format!("move to workspace number {}", next_ws))?;
-            i3.run_command(format!("workspace number {}", next_ws))?;
+            wm.run_command(format!("move to workspace number {}", next_ws))?;
+            wm.run_command(format!("workspace number {}", next_ws))?;
         }
         (false, true) => {
-            i3.run_command(format!("workspace number {}", next_ws))?;
+            wm.run_command(format!("workspace number {}", next_ws))?;
         }
         (true, false) => {
-            i3.run_command(format!("move to workspace number {}", next_ws))?;
+            wm.run_command(format!("move to workspace number {}", next_ws))?;
         }
 
         (false, false) => {

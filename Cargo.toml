@@ -7,5 +7,5 @@ description = "A companion utility to i3wm for managing workspaces."
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-i3_ipc = "0.12"
-clap = "3.0.0-beta.4"
+clap = "3.0.0-beta"
+swayipc = "2.7.2"
