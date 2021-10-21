@@ -1,5 +1,6 @@
 use clap::{clap_app, crate_version};
 use i3_ipc::{Connect, I3};
+use std::collections::HashSet;
 use std::io::{self, stdout, Write};
 
 fn opts() -> (bool, bool) {
@@ -16,23 +17,16 @@ fn opts() -> (bool, bool) {
 fn main() -> io::Result<()> {
     let opts = opts();
     let mut i3 = I3::connect()?;
-    let mut wss: Vec<_> = i3.get_workspaces()?.iter().map(|ws| ws.num).collect();
-    wss.sort_unstable();
-    let next_ws = if *wss.first().unwrap_or(&0) == 1 {
-        let nr = wss.windows(2).find(|ab| match ab {
-            [a, b] if a + 1 != *b => true,
-            [_, _] => false,
-            [_] => true,
-            _ => unreachable!(),
-        });
-        (match nr {
-            Some([n]) => n,
-            Some([n, _]) => n,
-            None => wss.last().unwrap_or(&0),
-            Some(_) => unreachable!(),
-        }) + 1
-    } else {
-        1
+    let mut wss: HashSet<_> = i3.get_workspaces()?.iter().map(|ws| ws.num).collect();
+    let next_ws = {
+        let mut n = 1;
+        loop {
+            if wss.insert(n) {
+                break;
+            }
+            n += 1;
+        }
+        n
     };
     match opts {
         (true, true) => {

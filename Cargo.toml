@@ -1,11 +1,11 @@
 [package]
 name = "i3-open-next-ws"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2018"
 description = "A companion utility to i3wm for managing workspaces."
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-i3_ipc = "0.12.0"
+i3_ipc = "0.12"
 clap = "3.0.0-beta.4"
