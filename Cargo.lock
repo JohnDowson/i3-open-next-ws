@@ -152,10 +152,33 @@ dependencies = [
 
 [[package]]
 name = "i3-open-next-ws"
-version = "0.1.1"
+version = "0.1.2"
 dependencies = [
  "clap",
+ "i3_ipc",
  "swayipc",
+]
+
+[[package]]
+name = "i3_ipc"
+version = "0.12.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d456b41e6f5311a2d5e4e999ee7a81c0764f8b85e90aa46af1211aa14403e194"
+dependencies = [
+ "i3ipc-types",
+ "serde",
+ "serde_json",
+]
+
+[[package]]
+name = "i3ipc-types"
+version = "0.12.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "898c201d200aefb7026818e12eb6cbe409aeb77a5a385b24c585eebfec64ce7a"
+dependencies = [
+ "serde",
+ "serde_json",
+ "serde_repr",
 ]
 
 [[package]]
@@ -303,6 +326,17 @@ dependencies = [
  "itoa",
  "ryu",
  "serde",
+]
+
+[[package]]
+name = "serde_repr"
+version = "0.1.7"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "98d0516900518c29efa217c298fa1f4e6c6ffc85ae29fd7f4ee48f176e1a9ed5"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
 ]
 
 [[package]]

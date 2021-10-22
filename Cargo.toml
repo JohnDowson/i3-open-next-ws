@@ -1,6 +1,6 @@
 [package]
 name = "i3-open-next-ws"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2018"
 description = "A companion utility to i3wm for managing workspaces."
 
@@ -9,3 +9,4 @@ description = "A companion utility to i3wm for managing workspaces."
 [dependencies]
 clap = "3.0.0-beta"
 swayipc = "2.7.2"
+i3_ipc = "0.12.0"
