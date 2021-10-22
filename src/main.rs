@@ -108,6 +108,7 @@ fn exec_on(conn: &mut Connection, cmd: Vec<String>, ws: i32) -> Fallible<()> {
                     return Ok(());
                 }
             }
+            Event::Window(_) => continue,
             _ => unreachable!(),
         }
     }
