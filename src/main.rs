@@ -20,9 +20,9 @@ struct Opts {
     /// Execute COMMAND on a new workspace
     #[clap(short, long, value_name = "COMMAND")]
     exec: Vec<String>,
-    /// workspace to execute on, overrides next open workspace selection
-    #[clap(short, long)]
-    on: Option<i32>,
+    /// overrides workspace selection
+    #[clap()]
+    workspace: Option<i32>,
 }
 
 // fn opts() -> (bool, bool, bool) {
@@ -43,7 +43,7 @@ struct Opts {
 fn main() -> Fallible<()> {
     let opts = Opts::parse();
     let mut conn = Connection::new()?;
-    let ws = if let Some(ws) = opts.on {
+    let ws = if let Some(ws) = opts.workspace {
         ws
     } else {
         let mut wss: HashSet<_> = match conn.get_workspaces() {
