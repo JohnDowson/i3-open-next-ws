@@ -26,7 +26,7 @@ $ i3-open-next-ws --focus 5
 ```
 This will open chromium on workspace 3
 ```sh
-$ i3-open-next-ws --exec 3
+$ i3-open-next-ws --exec chromium -- 3
 ```
 Commands can be combined: this will move currently focused window to the first unused workspace AND focus that workspace
 ```sh
