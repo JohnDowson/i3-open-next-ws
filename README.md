@@ -10,8 +10,25 @@ cargo install --git https://github.com/JohnDowson/i3-open-next-ws.git
 
 ## Usage:
 ```sh
-# Those two flags can be combined
-i3-open-next-ws --move # Moves focused window to first unused workspace
-i3-open-next-ws --focus # Focuses first unused workspace
-i3-open-next-ws # Writes the number of the first unused workspace to stdout
+i3-open-next-ws [OPTIONS] [WORKSPACE]
+OPTIONS:
+    -e, --exec <COMMAND>       Execute COMMAND on a new workspace
+    -f, --focus                Focus first unused workspace
+    -m, --move                 Move focused window to the first unused workspace
+```
+This will move currently focused window to first unused workspace:
+```sh
+$ i3-open-next-ws --move
+```
+This will focus workspace 5
+```sh
+$ i3-open-next-ws --focus 5
+```
+This will open chromium on workspace 3
+```sh
+$ i3-open-next-ws --exec 3
+```
+Commands can be combined: this will move currently focused window to the first unused workspace AND focus that workspace
+```sh
+$ i3-open-next-ws --focus --move
 ```
