@@ -3,8 +3,9 @@ name = "i3-open-next-ws"
 version = "0.1.2"
 edition = "2018"
 description = "A companion utility to i3wm for managing workspaces."
-license = "MIT"
 license-file = "LICENSE"
+repository = "https://github.com/JohnDowson/i3-open-next-ws"
+readme = "README.md"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
