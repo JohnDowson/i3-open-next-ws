@@ -1,13 +1,10 @@
 use clap::Parser;
 use i3_ipc::{Connect, I3};
 use std::{collections::HashSet, process::Command};
-use swayipc::{
-    reply::{Event, WindowChange},
-    Connection, EventType, Fallible,
-};
+use swayipc::{Connection, Event, EventType, Fallible, WindowChange};
 
 #[derive(Parser)]
-#[clap(version = "1.2")]
+#[clap(version)]
 /// A companion utility to i3wm for managing workspaces.
 /// Call without arguments to get first unused workspace number on STDOUT
 struct Opts {
@@ -25,21 +22,6 @@ struct Opts {
     workspace: Option<i32>,
 }
 
-// fn opts() -> (bool, bool, bool) {
-//     let matches = App::new("i3-open-next-ws")
-//         .version(crate_version!())
-//         .about("A companion utility to i3wm for managing workspaces.\nCall without arguments to get first unused workspace number on STDOUT")
-//         .arg(Arg::new("move").short('m').long("move").about("Move focused window to the first unused workspace"))
-//         .arg(Arg::new("focus").short('f').long("focus").about("Move focused window to the first unused workspace"))
-//         .arg(Arg::new("exec").short('e').long("exec").takes_value(true).value_name("COMMAND").about("Execute COMMAND on a new workspace"))
-//         .get_matches();
-//     (
-//         matches.is_present("move"),
-//         matches.is_present("focus"),
-//         matches.is_present("exec"),
-//     )
-// }
-
 fn main() -> Fallible<()> {
     let opts = Opts::parse();
     let mut conn = Connection::new()?;
@@ -53,7 +35,7 @@ fn main() -> Fallible<()> {
             Err(_) => I3::connect()?
                 .get_workspaces()?
                 .iter()
-                .map(|ws| ws.num as i32)
+                .map(|ws| ws.num)
                 .collect(),
         };
         {
